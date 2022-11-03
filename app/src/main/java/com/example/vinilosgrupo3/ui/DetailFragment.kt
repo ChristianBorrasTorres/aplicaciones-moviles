@@ -55,14 +55,15 @@ class DetailFragment : Fragment() {
         Log.d("Args", args.albumId.toString())
         viewModel = ViewModelProvider(this, DetailViewModel.Factory(activity.application, args.albumId)).get(DetailViewModel::class.java)
         viewModel.detail.observe(viewLifecycleOwner, Observer<Album> {
-            //it.apply {
-                //viewModelAdapter!!.detail = this
+            it.apply {
+                viewModelAdapter!!.detail = this
+                Log.d("Args", this.cover)
                 //if(this.isEmpty()){
-                    //binding.txtNoDetail.visibility = View.VISIBLE
+                //    binding.txtNoDetail.visibility = View.VISIBLE
                 //}else{
-                  //  binding.txtNoDetail.visibility = View.GONE
+                //    binding.txtNoDetail.visibility = View.GONE
                 //}
-            //}
+            }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()

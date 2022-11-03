@@ -1,6 +1,7 @@
 package com.example.vinilosgrupo3.network
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -48,6 +49,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
                 var item = Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"))
+                Log.d("Args", item.toString())
                 onComplete(item)
             },
             Response.ErrorListener {
