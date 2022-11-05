@@ -56,10 +56,9 @@ class DetailAdapter : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>(){
             @JvmStatic @BindingAdapter("android:image")
             fun loadImage(view: ImageView, imageUrl: String?) {
                 Glide.with(view.context)
-                    .load(imageUrl).apply(RequestOptions().circleCrop())
+                    .load(imageUrl).apply(RequestOptions())
                     .into(view)
             }
-
         }
     }
 }
