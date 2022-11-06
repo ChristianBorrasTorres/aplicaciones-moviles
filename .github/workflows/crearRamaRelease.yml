@@ -1,0 +1,47 @@
+name: Merge de la rama feature con develop
+
+# Controls when the action will run. 
+on:
+  push:
+    branches: ['develop']
+  pull_request:
+    branches: ['develop']
+
+# Workflow pruebas
+jobs:
+  job1:
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
+
+  crearRamaRelease:
+    name: crear rama Release
+    needs: job1
+    runs-on: windows-latest
+    steps:
+      - name: Checkout de repositorio
+        uses: actions/checkout@v2
+      - name: Crear rama 
+        run: | 
+          git checkout -b release
+          git push -f -u origin release
+  
+  mergeReleaseMain:
+    name: merge Release Main
+    needs: crearRamaRelease
+    runs-on: windows-latest
+    steps:
+      - name: release -> main
+        uses: tukasz/direct-merge-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: release
+          target-branch: main
+          commit-message: "Se mezcló la rama release con main"
