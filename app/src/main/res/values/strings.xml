@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Vinilos Grupo 3</string>
+    <string name="action_settings">Configuración</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Regresar</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="comment_rating_placeholder">##</string>
+    <string name="album_name_placeholder">Nombre del album</string>
+    <string name="album_description_placeholder">Descripcion del album</string>
+    <string name="txt_no_comments">No hay comentarios para este álbum</string>
+    <string name="title_albums">Albums</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="album_details">Detalles del álbum</string>
+    <string name="txt_no_detail">No hay detalles de este álbum</string>
+    <string name="album_description">Descripción del álbum</string>
+    <string name="album_genre">Género</string>
+</resources>
