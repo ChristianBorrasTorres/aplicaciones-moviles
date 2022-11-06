@@ -19,5 +19,6 @@
     <string name="album_details">Detalles del álbum</string>
     <string name="txt_no_detail">No hay detalles de este álbum</string>
     <string name="album_description">Descripción del álbum</string>
-    <string name="album_genre">Género</string>
+    <string name="album_genre">Género: </string>
+    <string name="album_release_date">Fecha lanzamiento: </string>
 </resources>
