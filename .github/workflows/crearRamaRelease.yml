@@ -1,4 +1,4 @@
-name: Merge de la rama feature con develop
+name: Crear rama release
 
 # Controls when the action will run. 
 on:
@@ -9,22 +9,10 @@ on:
 
 # Workflow pruebas
 jobs:
-  job1:
-    runs-on: macos-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: run tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectedCheck
-
   crearRamaRelease:
     name: crear rama Release
-    needs: job1
     runs-on: windows-latest
+    if: ${{ contains(github.event.head_commit.message, 'Release') }}
     steps:
       - name: Checkout de repositorio
         uses: actions/checkout@v2
