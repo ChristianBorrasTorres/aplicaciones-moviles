@@ -5,6 +5,8 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
+import com.example.vinilosgrupo3.repositories.AlbumRepository
+import com.example.vinilosgrupo3.repositories.DetailRepository
 
 class DetailViewModel(application: Application, albumId: Int) :  AndroidViewModel(application) {
 
@@ -25,18 +27,26 @@ class DetailViewModel(application: Application, albumId: Int) :  AndroidViewMode
 
     val id:Int = albumId
 
+    private val detailRepository = DetailRepository(application)
     init {
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
-        NetworkServiceAdapter.getInstance(getApplication()).getDetail(id, {
+        detailRepository.refreshData(id,{
             _detail.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         },{
             _eventNetworkError.value = true
         })
+        /*NetworkServiceAdapter.getInstance(getApplication()).getDetail(id, {
+            _detail.postValue(it)
+            _eventNetworkError.value = false
+            _isNetworkErrorShown.value = false
+        },{
+            _eventNetworkError.value = true
+        })*/
     }
 
     fun onNetworkErrorShown() {
