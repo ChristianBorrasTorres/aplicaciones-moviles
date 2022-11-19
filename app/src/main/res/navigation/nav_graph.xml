@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/albumFragment">
+    app:startDestination="@id/musicianFragment">
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.vinilosgrupo3.ui.AlbumFragment"
@@ -20,6 +20,24 @@
         tools:layout="@layout/detail_fragment" >
         <argument
             android:name="albumId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/musicianFragment"
+        android:name="com.example.vinilosgrupo3.ui.MusicianFragment"
+        android:label="Artistas"
+        tools:layout="@layout/musician_fragment" >
+        <action
+            android:id="@+id/action_musicianFragment_to_musicianDetailFragment"
+            app:destination="@id/musicianDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/musicianDetailFragment"
+        android:name="com.example.vinilosgrupo3.ui.MusicianDetailFragment"
+        android:label="Detalles del artista"
+        tools:layout="@layout/musician_detail_fragment" >
+        <argument
+            android:name="musicianId"
             app:argType="integer" />
     </fragment>
 </navigation>

@@ -21,4 +21,8 @@
     <string name="album_description">Descripción del álbum</string>
     <string name="album_genre">Género: </string>
     <string name="album_release_date">Fecha lanzamiento: </string>
+    <string name="title_musicians">Artistas</string>
+    <string name="txt_no_musician_detail">No hay detalles de este artista</string>
+    <string name="musician_details">Detalles del artista</string>
+    <string name="musician_birth_date">Fecha de nacimiento: </string>
 </resources>
