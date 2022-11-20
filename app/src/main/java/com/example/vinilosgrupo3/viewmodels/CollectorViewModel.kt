@@ -1,5 +1,4 @@
 package com.example.vinilosgrupo3.viewmodels
-
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinilosgrupo3.models.Collector
@@ -23,7 +22,6 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
         get() = _isNetworkErrorShown
 
     private val collectorRepository = CollectorRepository(application)
-
 
     init {
         refreshDataFromNetwork()

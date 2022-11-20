@@ -1,11 +1,7 @@
 package com.example.vinilosgrupo3.viewmodels
-
 import android.app.Application
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.example.vinilosgrupo3.models.Album
-import com.example.vinilosgrupo3.network.NetworkServiceAdapter
-import com.example.vinilosgrupo3.repositories.AlbumRepository
 import com.example.vinilosgrupo3.repositories.DetailRepository
 
 class DetailViewModel(application: Application, albumId: Int) :  AndroidViewModel(application) {

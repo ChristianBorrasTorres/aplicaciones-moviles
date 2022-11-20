@@ -1,5 +1,5 @@
 package com.example.vinilosgrupo3.ui.adapters
-
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,15 +15,14 @@ import com.example.vinilosgrupo3.models.Album
 import java.text.DateFormat
 import java.util.*
 
-
 class DetailAdapter : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>(){
 
     var detail: Album? = null
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         val withDataBinding: DetailItemBinding = DataBindingUtil.inflate(

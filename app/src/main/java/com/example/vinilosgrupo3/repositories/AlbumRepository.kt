@@ -12,6 +12,5 @@ class AlbumRepository (val application: Application) {
         },{
             onError
         })
-
     }
 }

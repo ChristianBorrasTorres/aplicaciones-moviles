@@ -1,4 +1,5 @@
 package com.example.vinilosgrupo3.ui.adapters
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -13,6 +14,7 @@ import com.example.vinilosgrupo3.ui.MusicianFragmentDirections
 class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolder>(){
 
     var musicians :List<Musician> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -50,6 +52,4 @@ class MusiciansAdapter : RecyclerView.Adapter<MusiciansAdapter.MusicianViewHolde
             val LAYOUT = R.layout.musician_item
         }
     }
-
-
 }

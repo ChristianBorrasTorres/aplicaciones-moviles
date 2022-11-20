@@ -1,13 +1,9 @@
 package com.example.vinilosgrupo3.ui
-
-import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,9 +17,6 @@ import com.example.vinilosgrupo3.ui.adapters.CollectorDetailAdapter
 import com.example.vinilosgrupo3.viewmodels.CollectorDetailViewModel
 
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class CollectorDetailFragment : Fragment() {
     private var _binding: CollectorDetailFragmentBinding? = null
     private val binding get() = _binding!!
@@ -59,12 +52,6 @@ class CollectorDetailFragment : Fragment() {
         viewModel.collectorDetail.observe(viewLifecycleOwner, Observer<Collector> {
             it.apply {
                 viewModelAdapter!!.collectorDetail = this
-
-                //if(this.isEmpty()){
-                //    binding.txtNoDetail.visibility = View.VISIBLE
-                //}else{
-                //    binding.txtNoDetail.visibility = View.GONE
-                //}
             }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->

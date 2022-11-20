@@ -1,11 +1,7 @@
 package com.example.vinilosgrupo3.viewmodels
-
 import android.app.Application
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.example.vinilosgrupo3.models.Collector
-import com.example.vinilosgrupo3.network.NetworkServiceAdapter
-import com.example.vinilosgrupo3.repositories.CollectorRepository
 import com.example.vinilosgrupo3.repositories.CollectorDetailRepository
 
 class CollectorDetailViewModel(application: Application, collectorId: Int) :  AndroidViewModel(application) {
@@ -40,13 +36,6 @@ class CollectorDetailViewModel(application: Application, collectorId: Int) :  An
         },{
             _eventNetworkError.value = true
         })
-        /*NetworkServiceAdapter.getInstance(getApplication()).getDetail(id, {
-            _detail.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })*/
     }
 
     fun onNetworkErrorShown() {
@@ -62,6 +51,4 @@ class CollectorDetailViewModel(application: Application, collectorId: Int) :  An
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
-
-
 }

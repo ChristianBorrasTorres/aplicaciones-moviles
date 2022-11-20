@@ -1,5 +1,5 @@
 package com.example.vinilosgrupo3.ui.adapters
-
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,16 +15,14 @@ import com.example.vinilosgrupo3.models.Collector
 import java.text.DateFormat
 import java.util.*
 
-
 class CollectorDetailAdapter : RecyclerView.Adapter<CollectorDetailAdapter.CollectorDetailViewHolder>(){
 
     var collectorDetail: Collector? = null
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorDetailViewHolder {
         val withDataBinding: CollectorDetailItemBinding = DataBindingUtil.inflate(

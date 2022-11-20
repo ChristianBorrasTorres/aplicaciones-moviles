@@ -1,12 +1,10 @@
 package com.example.vinilosgrupo3.ui
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,9 +17,6 @@ import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.ui.adapters.DetailAdapter
 import com.example.vinilosgrupo3.viewmodels.DetailViewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class DetailFragment : Fragment() {
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!

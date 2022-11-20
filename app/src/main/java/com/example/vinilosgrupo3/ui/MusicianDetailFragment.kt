@@ -17,9 +17,6 @@ import com.example.vinilosgrupo3.models.Musician
 import com.example.vinilosgrupo3.ui.adapters.MusicianDetailAdapter
 import com.example.vinilosgrupo3.viewmodels.MusicianDetailViewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class MusicianDetailFragment : Fragment() {
     private var _binding: MusicianDetailFragmentBinding? = null
     private val binding get() = _binding!!

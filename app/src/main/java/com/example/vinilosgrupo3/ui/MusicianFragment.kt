@@ -1,5 +1,4 @@
 package com.example.vinilosgrupo3.ui
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +15,6 @@ import com.example.vinilosgrupo3.models.Musician
 import com.example.vinilosgrupo3.ui.adapters.MusiciansAdapter
 import com.example.vinilosgrupo3.viewmodels.MusicianViewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class MusicianFragment : Fragment() {
     private var _binding: MusicianFragmentBinding? = null
     private val binding get() = _binding!!

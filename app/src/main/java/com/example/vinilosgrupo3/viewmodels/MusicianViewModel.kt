@@ -1,9 +1,7 @@
 package com.example.vinilosgrupo3.viewmodels
-
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinilosgrupo3.models.Musician
-import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 import com.example.vinilosgrupo3.repositories.MusicianRepository
 
 class MusicianViewModel(application: Application) :  AndroidViewModel(application) {
@@ -24,7 +22,6 @@ class MusicianViewModel(application: Application) :  AndroidViewModel(applicatio
         get() = _isNetworkErrorShown
 
     private val musicianRepository = MusicianRepository(application)
-
 
     init {
         refreshDataFromNetwork()

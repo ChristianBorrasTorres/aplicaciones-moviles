@@ -49,7 +49,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(getRequest("albums/$albumId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
-                var item = Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"))
+                val item = Album(albumId = resp.getInt("id"),name = resp.getString("name"), cover = resp.getString("cover"), recordLabel = resp.getString("recordLabel"), releaseDate = resp.getString("releaseDate"), genre = resp.getString("genre"), description = resp.getString("description"))
                 Log.d("Args", item.toString())
                 onComplete(item)
             },
@@ -81,7 +81,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(getRequest("musicians/$musicianId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
-                var item = Musician(musicianId = resp.getInt("id"),name = resp.getString("name"), image = resp.getString("image"), description = resp.getString("description"), birthDate = resp.getString("birthDate"),album)
+                val item = Musician(musicianId = resp.getInt("id"),name = resp.getString("name"), image = resp.getString("image"), description = resp.getString("description"), birthDate = resp.getString("birthDate"),album)
                 Log.d("Args", item.toString())
                 onComplete(item)
             },
@@ -190,7 +190,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                             collectorAlbumsItem.getString("status"))
                     )
                 }
-                var item = Collector(id = resp.getInt("id"),
+                val item = Collector(id = resp.getInt("id"),
                     name = resp.getString("name"),
                     telephone = resp.getString("telephone"),
                     email = resp.getString("email"),

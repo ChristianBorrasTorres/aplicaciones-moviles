@@ -1,5 +1,4 @@
 package com.example.vinilosgrupo3.repositories
-
 import android.app.Application
 import com.android.volley.VolleyError
 import com.example.vinilosgrupo3.models.Album
@@ -13,5 +12,4 @@ class DetailRepository (val application: Application) {
             onError
         })
     }
-
 }

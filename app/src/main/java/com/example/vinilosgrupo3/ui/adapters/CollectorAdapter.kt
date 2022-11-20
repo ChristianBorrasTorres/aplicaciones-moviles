@@ -1,5 +1,5 @@
 package com.example.vinilosgrupo3.ui.adapters
-
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -14,6 +14,7 @@ import com.example.vinilosgrupo3.ui.CollectorFragmentDirections
 class CollectorAdapter : RecyclerView.Adapter<CollectorAdapter.CollectorViewHolder>(){
 
     var collectors :List<Collector> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -43,7 +44,6 @@ class CollectorAdapter : RecyclerView.Adapter<CollectorAdapter.CollectorViewHold
         return collectors.size
     }
 
-
     class CollectorViewHolder(val viewDataBinding: CollectorItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
@@ -51,6 +51,4 @@ class CollectorAdapter : RecyclerView.Adapter<CollectorAdapter.CollectorViewHold
             val LAYOUT = R.layout.collector_item
         }
     }
-
-
 }
