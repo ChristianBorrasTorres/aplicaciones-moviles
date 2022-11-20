@@ -16,7 +16,7 @@
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/detailRv"
+        android:id="@+id/collectorDetailRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/detail_item">

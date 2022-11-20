@@ -10,6 +10,7 @@ import static  androidx.test.espresso.matcher.ViewMatchers.*;
 import static org.hamcrest.core.AllOf.allOf;
 
 
+import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.ViewAction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -41,6 +42,10 @@ public class EspressoTest_e2e {
                 .check(matches(isDisplayed()));*/
 
         sleep(1000);
+        //click on button "visitantes"
+        onView(allOf(withId(R.id.button), isDisplayed())).perform(click());
+
+        sleep(1000);
         // click on album in list
         onView(allOf(withId(R.id.albumsRv), isDisplayed())).perform(new ViewAction[]{
                 RecyclerViewActions.actionOnItemAtPosition(0, click())
@@ -61,6 +66,85 @@ public class EspressoTest_e2e {
         // return to album catalog and check if album catalog is displayed
         pressBack();
         onView(allOf(withId(R.id.albumsRv), isDisplayed()));
+
+    }
+
+
+    @Test
+    public void visualizarMusicoDetalle() {
+
+        // check whether album names and pictures are displayed
+        /*onView(withRecyclerView(R.id.albumsRv)
+                .atPositionOnView(1, R.id.album_name))
+                .check(matches(isDisplayed()));*/
+
+        sleep(1000);
+        //click on menu button and "Artistas"
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText(R.string.action_artistas)).perform(click());
+
+        sleep(1000);
+        // click on first artist card
+        onView(allOf(withId(R.id.musiciansRv), isDisplayed())).perform(new ViewAction[]{
+                RecyclerViewActions.actionOnItemAtPosition(0, click())
+        });
+
+        // check if view artist detail is displayed
+        onView(withId(R.id.musiciandetailRv)).check(matches(isDisplayed()));
+
+        // check if artist name is displayed
+        onView(withId(R.id.detail_musician_name_placeholder)).check(matches(withText("Rubén Blades Bellido de Luna")));
+
+        // check if artist description is displayed
+        onView(withId(R.id.detail_musician_description)).check(matches(isDisplayed()));
+
+        // check if artist image is displayed
+        onView(withId(R.id.detail_musician_image)).check(matches(isDisplayed()));
+
+        // check if artist birthdate is displayed
+        onView(withId(R.id.detail_musician_birthDate)).check(matches(isDisplayed()));
+
+        // return to album catalog and check if album catalog is displayed
+        pressBack();
+        onView(allOf(withId(R.id.musiciansRv), isDisplayed()));
+
+    }
+
+
+    @Test
+    public void visualizarColeccionistaLista() {
+
+        // check whether album names and pictures are displayed
+        /*onView(withRecyclerView(R.id.albumsRv)
+                .atPositionOnView(1, R.id.album_name))
+                .check(matches(isDisplayed()));*/
+
+        sleep(1000);
+        //click on menu button and "Coleccionistas"
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText(R.string.action_collectors)).perform(click());
+
+        sleep(1000);
+        // click on first collector card
+        onView(allOf(withId(R.id.collectorsRv), isDisplayed())).perform(new ViewAction[]{
+                RecyclerViewActions.actionOnItemAtPosition(0, click())
+        });
+
+        // check if view collector detail is displayed
+        onView(withId(R.id.collectorDetailRv)).check(matches(isDisplayed()));
+
+        // check if collector name is displayed
+        onView(withId(R.id.collector_name_detail_placeholder)).check(matches(withText("Manolo Bellon")));
+
+        // check if collector telephone number is displayed
+        onView(withId(R.id.collector_detail_telephone)).check(matches(isDisplayed()));
+
+        // check if collector e-mail is displayed
+        onView(withId(R.id.collector_detail_email)).check(matches(isDisplayed()));
+
+        // return to album catalog and check if album catalog is displayed
+        pressBack();
+        onView(allOf(withId(R.id.collectorsRv), isDisplayed()));
 
     }
 

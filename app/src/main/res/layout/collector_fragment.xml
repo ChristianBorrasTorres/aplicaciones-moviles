@@ -14,7 +14,7 @@
         android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/albumsRv"
+        android:id="@+id/collectorsRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/collector_item"/>
