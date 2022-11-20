@@ -31,4 +31,24 @@
             android:id="@+id/action_homeFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/musicianFragment"
+        android:name="com.example.vinilosgrupo3.ui.MusicianFragment"
+        android:label="Artistas"
+        tools:layout="@layout/musician_fragment" >
+        <action
+            android:id="@+id/action_musicianFragment_to_musicianDetailFragment"
+            app:destination="@id/musicianDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/musicianDetailFragment"
+        android:name="com.example.vinilosgrupo3.ui.MusicianDetailFragment"
+        android:label="Detalles del artista"
+        tools:layout="@layout/musician_detail_fragment" >
+        <argument
+            android:name="musicianId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Vinilos Grupo 3</string>
-    <string name="action_settings">Configuración</string>
+    <string name="action_albumes">Álbumes</string>
+    <string name="action_artistas">Artistas</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -21,9 +22,16 @@
     <string name="album_description">Descripción del álbum</string>
     <string name="album_genre">Género: </string>
     <string name="album_release_date">Fecha lanzamiento: </string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button">Visitante</string>
     <string name="button_visitors">Visitantes</string>
     <string name="home_image">Imagen del home de la aplicación</string>
+
+    <string name="title_musicians">Artistas</string>
+    <string name="txt_no_musician_detail">No hay detalles de este artista</string>
+    <string name="musician_details">Detalles del artista</string>
+    <string name="musician_birth_date">Fecha de nacimiento: </string>
+
 </resources>

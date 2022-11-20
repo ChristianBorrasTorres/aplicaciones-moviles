@@ -3,17 +3,16 @@ package com.example.vinilosgrupo3.viewmodels
 import android.app.Application
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
-import com.example.vinilosgrupo3.models.Album
+import com.example.vinilosgrupo3.models.Musician
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
-import com.example.vinilosgrupo3.repositories.AlbumRepository
-import com.example.vinilosgrupo3.repositories.DetailRepository
+import com.example.vinilosgrupo3.repositories.MusicianDetailRepository
 
-class DetailViewModel(application: Application, albumId: Int) :  AndroidViewModel(application) {
+class MusicianDetailViewModel(application: Application, musicianId: Int) :  AndroidViewModel(application) {
 
-    private val _detail = MutableLiveData<Album>()
+    private val _musiciandetail = MutableLiveData<Musician>()
 
-    val detail: LiveData<Album>
-        get() = _detail
+    val musiciandetail: LiveData<Musician>
+        get() = _musiciandetail
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -25,16 +24,16 @@ class DetailViewModel(application: Application, albumId: Int) :  AndroidViewMode
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    val id:Int = albumId
+    val id:Int = musicianId
 
-    private val detailRepository = DetailRepository(application)
+    private val musicianDetailRepository = MusicianDetailRepository(application)
     init {
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
-        detailRepository.refreshData(id,{
-            _detail.postValue(it)
+        musicianDetailRepository.refreshData(id,{
+            _musiciandetail.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         },{
@@ -46,11 +45,11 @@ class DetailViewModel(application: Application, albumId: Int) :  AndroidViewMode
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val albumId: Int) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val musicianId: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(MusicianDetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return DetailViewModel(app, albumId) as T
+                return MusicianDetailViewModel(app, musicianId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
