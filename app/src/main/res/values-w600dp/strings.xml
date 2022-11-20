@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button">Visitante</string>
+    <string name="button_visitors">Visitantes</string>
+    <string name="home_image">Imagen del home de la aplicación</string>
+</resources>
