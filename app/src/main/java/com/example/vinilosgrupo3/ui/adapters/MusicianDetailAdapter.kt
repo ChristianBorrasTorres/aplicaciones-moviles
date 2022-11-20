@@ -52,7 +52,7 @@ class MusicianDetailAdapter : RecyclerView.Adapter<MusicianDetailAdapter.Musicia
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
-            val LAYOUT = R.layout.musician_item
+            val LAYOUT = R.layout.musician_detail_item
             @JvmStatic @BindingAdapter("android:image")
             fun loadImage(view: ImageView, imageUrl: String?) {
                 Glide.with(view.context)
