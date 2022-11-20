@@ -3,7 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/albumFragment">
+    app:startDestination="@id/collectorFragment">
+    <fragment
+        android:id="@+id/collectorFragment"
+        android:name="com.example.vinilosgrupo3.ui.CollectorFragment"
+        android:label="Coleccionistas"
+        tools:layout="@layout/collector_fragment" >
+        <action
+            android:id="@+id/action_collectorFragment_to_collectorDetailFragment"
+            app:destination="@id/collectorDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/collectorDetailFragment"
+        android:name="com.example.vinilosgrupo3.ui.CollectorDetailFragment"
+        android:label="Detalles del coleccionista"
+        tools:layout="@layout/collector_detail_fragment" >
+        <argument
+            android:name="collectorId"
+            app:argType="integer" />
+    </fragment>
+
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.vinilosgrupo3.ui.AlbumFragment"

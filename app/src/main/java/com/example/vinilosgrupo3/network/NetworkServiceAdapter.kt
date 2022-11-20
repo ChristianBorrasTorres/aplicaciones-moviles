@@ -9,7 +9,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.vinilosgrupo3.models.Album
+import com.example.vinilosgrupo3.models.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -56,6 +56,123 @@ class NetworkServiceAdapter constructor(context: Context) {
                 onError(it)
             }))
     }
+
+    fun getCollectors(onComplete:(resp:List<Collector>)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("collectors",
+            Response.Listener<String> { response ->
+                val list = mutableListOf<Collector>()
+                val commentsList = mutableListOf<Comment>()
+                val favoritePerformersList = mutableListOf<Musician>()
+                val collectorAlbumsList = mutableListOf<CollectorAlbums>()
+
+                val resp = JSONArray(response)
+
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+
+                    val commentsJson = item.getJSONArray("comments")
+                    for (j in 0 until commentsJson.length()) {
+                        val commentItem = commentsJson.getJSONObject(j)
+                        //Log.d("Args", commentItem.toString())
+                        commentsList.add(j,Comment(commentItem.getInt("id"),commentItem.getString("description"),commentItem.getInt("rating")))
+                    }
+
+                    val favoritePerformersJson = item.getJSONArray("favoritePerformers")
+                    for (j in 0 until favoritePerformersJson.length()) {
+                        val favoritePerformersItem = favoritePerformersJson.getJSONObject(j)
+                        //Log.d("Args", favoritePerformersItem.toString())
+                        favoritePerformersList.add(j,
+                            Musician(favoritePerformersItem.getInt("id"),
+                                favoritePerformersItem.getString("name"),
+                                favoritePerformersItem.getString("image"),
+                                favoritePerformersItem.getString("description"),
+                                "", //favoritePerformersItem.getString("creationDate"),
+                                mutableListOf<Album>()))
+                    }
+                    val collectorAlbumsJson = item.getJSONArray("collectorAlbums")
+                    for (j in 0 until collectorAlbumsJson.length()) {
+                        val collectorAlbumsItem = collectorAlbumsJson.getJSONObject(j)
+                        //Log.d("Args", collectorAlbumsItem.toString())
+                        collectorAlbumsList.add(j,
+                            CollectorAlbums(collectorAlbumsItem.getInt("id"),
+                                collectorAlbumsItem.getInt("price"),
+                                collectorAlbumsItem.getString("status"))
+                        )
+                    }
+                    list.add(i, Collector(
+                        id = item.getInt("id"),
+                        name = item.getString("name"),
+                        telephone = item.getString("telephone"),
+                        email = item.getString("email"),
+                        comments = commentsList,
+                        favoritePerformers = favoritePerformersList,
+                        collectorAlbums = collectorAlbumsList
+                ))
+                }
+                Log.d("Args", list.toString())
+                onComplete(list)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+    }
+
+    fun getCollectorsDetail(collectorId:Int, onComplete:(resp:Collector)->Unit, onError: (error:VolleyError)->Unit){
+        requestQueue.add(getRequest("collectors/$collectorId",
+            Response.Listener<String> { response ->
+                val resp = JSONObject(response)
+
+                val commentsList = mutableListOf<Comment>()
+                val favoritePerformersList = mutableListOf<Musician>()
+                val collectorAlbumsList = mutableListOf<CollectorAlbums>()
+
+                val commentsJson = resp.getJSONArray("comments")
+                for (i in 0 until commentsJson.length()) {
+                    val commentItem = commentsJson.getJSONObject(i)
+                    commentsList.add(i,Comment(commentItem.getInt("id"),
+                        commentItem.getString("description"),
+                        commentItem.getInt("rating")))
+                }
+
+                val favoritePerformersJson = resp.getJSONArray("favoritePerformers")
+                for (j in 0 until favoritePerformersJson.length()) {
+                    val favoritePerformersItem = favoritePerformersJson.getJSONObject(j)
+                    //Log.d("Args", favoritePerformersItem.toString())
+                    favoritePerformersList.add(j,
+                        Musician(favoritePerformersItem.getInt("id"),
+                            favoritePerformersItem.getString("name"),
+                            favoritePerformersItem.getString("image"),
+                            favoritePerformersItem.getString("description"),
+                            "",
+                            mutableListOf<Album>()))
+                }
+
+                val collectorAlbumsJson = resp.getJSONArray("collectorAlbums")
+                for (j in 0 until collectorAlbumsJson.length()) {
+                    val collectorAlbumsItem = collectorAlbumsJson.getJSONObject(j)
+                    //Log.d("Args", collectorAlbumsItem.toString())
+                    collectorAlbumsList.add(j,
+                        CollectorAlbums(collectorAlbumsItem.getInt("id"),
+                            collectorAlbumsItem.getInt("price"),
+                            collectorAlbumsItem.getString("status"))
+                    )
+                }
+                var item = Collector(id = resp.getInt("id"),
+                    name = resp.getString("name"),
+                    telephone = resp.getString("telephone"),
+                    email = resp.getString("email"),
+                    comments = commentsList,
+                    favoritePerformers = favoritePerformersList,
+                    collectorAlbums = collectorAlbumsList)
+
+                Log.d("Args", item.toString())
+                onComplete(item)
+            },
+            Response.ErrorListener {
+                onError(it)
+            }))
+    }
+
 
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
