@@ -5,7 +5,6 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.example.vinilosgrupo3.models.Musician
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
-import com.example.vinilosgrupo3.repositories.MusicianRepository
 import com.example.vinilosgrupo3.repositories.MusicianDetailRepository
 
 class MusicianDetailViewModel(application: Application, musicianId: Int) :  AndroidViewModel(application) {
