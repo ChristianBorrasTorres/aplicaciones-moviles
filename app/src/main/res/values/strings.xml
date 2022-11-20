@@ -1,7 +1,13 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Vinilos Grupo 3</string>
+
     <string name="action_albumes">Álbumes</string>
     <string name="action_artistas">Artistas</string>
+    <string name="action_collectors">Coleccionistas</string>
+
+    <string name="selected_item">Selected item:</string>
+    <string name="action_settings">Configuración</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -15,9 +21,11 @@
     <string name="album_description_placeholder">Descripcion del album</string>
     <string name="txt_no_comments">No hay comentarios para este álbum</string>
     <string name="title_albums">Albums</string>
+    <string name="title_collectors">Coleccionistas</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="album_details">Detalles del álbum</string>
+    <string name="collector_details">Detalles del coleccionista</string>
     <string name="txt_no_detail">No hay detalles de este álbum</string>
     <string name="album_description">Descripción del álbum</string>
     <string name="album_genre">Género: </string>
