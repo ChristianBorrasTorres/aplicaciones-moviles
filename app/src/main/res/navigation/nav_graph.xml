@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vinilosgrupo3.ui.HomeFragment"
-        android:label="fragment_home"
+        android:label="Inicio"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_albumFragment"

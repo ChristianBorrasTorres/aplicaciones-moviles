@@ -96,21 +96,21 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
-    fun getMusicianDetail(musicianId:Int, onComplete:(resp:Musician)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getMusicianDetail(musicianId:Int) = suspendCoroutine<Musician> { cont ->
         val album = mutableListOf<Album>()
         requestQueue.add(getRequest("musicians/$musicianId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
                 var item = Musician(musicianId = resp.getInt("id"),name = resp.getString("name"), image = resp.getString("image"), description = resp.getString("description"), birthDate = resp.getString("birthDate"),album)
                 Log.d("Args", item.toString())
-                onComplete(item)
+                cont.resume(item)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
-    fun getCollectors(onComplete:(resp:List<Collector>)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont ->
         requestQueue.add(getRequest("collectors",
             Response.Listener<String> { response ->
                 val list = mutableListOf<Collector>()
@@ -163,14 +163,14 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ))
                 }
                 Log.d("Args", list.toString())
-                onComplete(list)
+                cont.resume(list)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
-    fun getCollectorsDetail(collectorId:Int, onComplete:(resp:Collector)->Unit, onError: (error:VolleyError)->Unit){
+    suspend fun getCollectorsDetail(collectorId:Int) = suspendCoroutine<Collector> { cont ->
         requestQueue.add(getRequest("collectors/$collectorId",
             Response.Listener<String> { response ->
                 val resp = JSONObject(response)
@@ -220,10 +220,10 @@ class NetworkServiceAdapter constructor(context: Context) {
 
 
                 Log.d("Args", item.toString())
-                onComplete(item)
+                cont.resume(item)
             },
             Response.ErrorListener {
-                onError(it)
+                cont.resumeWithException(it)
             }))
     }
 
