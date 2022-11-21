@@ -7,6 +7,9 @@ import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 import com.example.vinilosgrupo3.repositories.AlbumRepository
 import com.example.vinilosgrupo3.repositories.DetailRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailViewModel(application: Application, albumId: Int) :  AndroidViewModel(application) {
 
@@ -32,7 +35,7 @@ class DetailViewModel(application: Application, albumId: Int) :  AndroidViewMode
         refreshDataFromNetwork()
     }
 
-    private fun refreshDataFromNetwork() {
+    /*private fun refreshDataFromNetwork() {
         detailRepository.refreshData(id,{
             _detail.postValue(it)
             _eventNetworkError.value = false
@@ -40,6 +43,21 @@ class DetailViewModel(application: Application, albumId: Int) :  AndroidViewMode
         },{
             _eventNetworkError.value = true
         })
+    }*/
+    private fun refreshDataFromNetwork() {
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = detailRepository.refreshData(id)
+                    _detail.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
+            _eventNetworkError.value = true
+        }
     }
 
     fun onNetworkErrorShown() {
