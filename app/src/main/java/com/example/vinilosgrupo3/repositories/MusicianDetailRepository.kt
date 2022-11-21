@@ -6,12 +6,7 @@ import com.example.vinilosgrupo3.models.Musician
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 
 class MusicianDetailRepository (val application: Application) {
-    fun refreshData(musicianId:Int, callback: (Musician)->Unit, onError: (VolleyError)->Unit) {
-        NetworkServiceAdapter.getInstance(application).getMusicianDetail(musicianId,{
-            callback(it)
-        },{
-            onError
-        })
+    suspend fun refreshData(musicianId:Int) : Musician {
+        return NetworkServiceAdapter.getInstance(application).getMusicianDetail(musicianId)
     }
-
 }

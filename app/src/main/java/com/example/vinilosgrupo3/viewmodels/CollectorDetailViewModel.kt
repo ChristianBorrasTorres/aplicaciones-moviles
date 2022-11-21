@@ -7,6 +7,9 @@ import com.example.vinilosgrupo3.models.Collector
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 import com.example.vinilosgrupo3.repositories.CollectorRepository
 import com.example.vinilosgrupo3.repositories.CollectorDetailRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CollectorDetailViewModel(application: Application, collectorId: Int) :  AndroidViewModel(application) {
 
@@ -32,21 +35,22 @@ class CollectorDetailViewModel(application: Application, collectorId: Int) :  An
         refreshDataFromNetwork()
     }
 
+
+
     private fun refreshDataFromNetwork() {
-        collectorDetailRepository.refreshData(id,{
-            _collectorDetail.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = collectorDetailRepository.refreshData(id)
+                    _collectorDetail.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
             _eventNetworkError.value = true
-        })
-        /*NetworkServiceAdapter.getInstance(getApplication()).getDetail(id, {
-            _detail.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })*/
+        }
     }
 
     fun onNetworkErrorShown() {
