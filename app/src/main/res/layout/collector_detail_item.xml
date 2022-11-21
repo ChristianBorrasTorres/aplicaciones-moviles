@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="collector_detail" type="com.example.vinilosgrupo3.models.Collector"/>
+        <variable name="detailViewModel" type="com.example.vinilosgrupo3.viewmodels.CollectorViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardBackgroundColor="@color/white"
+            app:strokeColor="@color/black_overlay"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/collector_name_detail_placeholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:text="@{collector_detail.name}"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_overlay"/>
+                <TextView
+                    android:id="@+id/collector_detail_telephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:text="@{collector_detail.telephone}"
+                    android:textColor="@color/black_overlay"/>
+
+                <TextView
+                    android:id="@+id/collector_detail_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:text="@{collector_detail.email}"
+                    android:textColor="@color/black_overlay"/>
+
+                <Spinner
+                    android:id="@+id/planets_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

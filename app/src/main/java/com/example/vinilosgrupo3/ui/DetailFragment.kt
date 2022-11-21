@@ -58,11 +58,6 @@ class DetailFragment : Fragment() {
             it.apply {
                 viewModelAdapter!!.detail = this
                 Log.d("Args", this.cover)
-                //if(this.isEmpty()){
-                //    binding.txtNoDetail.visibility = View.VISIBLE
-                //}else{
-                //    binding.txtNoDetail.visibility = View.GONE
-                //}
             }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->

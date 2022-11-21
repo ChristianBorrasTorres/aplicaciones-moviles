@@ -8,6 +8,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.vinilosgrupo3.R
 import com.example.vinilosgrupo3.databinding.ActivityMainBinding
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
+import java.util.zip.Inflater
+import com.example.vinilosgrupo3.ui.AlbumFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -26,10 +33,19 @@ class MainActivity : AppCompatActivity() {
         Log.d("act", navController.toString())
         setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 }
