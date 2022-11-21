@@ -2,6 +2,7 @@ package com.example.vinilosgrupo3.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.vinilosgrupo3.database.VinylRoomDatabase
 import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 import com.example.vinilosgrupo3.repositories.AlbumRepository
@@ -26,7 +27,9 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    private val albumRepository = AlbumRepository(application)
+    //private val albumRepository = AlbumRepository(application)
+    private val albumRepository = AlbumRepository(application, VinylRoomDatabase.getDatabase(application.applicationContext).albumsDao())
+
 
 
     init {
