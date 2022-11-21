@@ -1,8 +1,10 @@
 package com.example.vinilosgrupo3.repositories
 
 import android.app.Application
+import android.util.Log
 import com.android.volley.VolleyError
 import com.example.vinilosgrupo3.models.Album
+import com.example.vinilosgrupo3.network.CacheManager
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 
 class AlbumRepository (val application: Application) {
@@ -15,7 +17,16 @@ class AlbumRepository (val application: Application) {
 
     }*/
     suspend fun refreshData(): List<Album> {
-        //Determinar la fuente de datos que se va a utilizar. Si es necesario consultar la red, ejecutar el siguiente código
-        return NetworkServiceAdapter.getInstance(application).getAlbums()
+        var potentialResp = CacheManager.getInstance(application.applicationContext).getAlbums()
+        if(potentialResp.isEmpty()){
+            Log.d("Cache decision", "get from network")
+            var albums = NetworkServiceAdapter.getInstance(application).getAlbums()
+            CacheManager.getInstance(application.applicationContext).addAlbums(albums)
+            return albums
+        }
+        else{
+            Log.d("Cache decision", "return ${potentialResp.size} elements from cache")
+            return potentialResp
+        }
     }
 }
