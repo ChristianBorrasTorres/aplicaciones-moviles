@@ -19,4 +19,13 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/collector_item"/>
 
+    <Button
+        android:id="@+id/button_create_album"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/button_create_album"
+        android:textColor="#4527A0"
+        android:layout_gravity="bottom"/>
+
 </FrameLayout>
