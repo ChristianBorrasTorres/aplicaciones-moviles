@@ -1,6 +1,7 @@
 package com.example.vinilosgrupo3.ui
 
 import android.os.Bundle
+import android.text.BoringLayout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -83,7 +84,7 @@ class CreateAlbumFragment : Fragment() {
                     parent: AdapterView<*>,
                     view: View, position: Int, id: Long
                 ) {
-                    Toast.makeText(appContext,getString(R.string.selected_item) + " " + "" + genres[position],Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(appContext,getString(R.string.selected_item) + " " + "" + genres[position],Toast.LENGTH_SHORT).show()
                     genreAlbumTxt  = genres[position]
                 }
 
@@ -107,7 +108,7 @@ class CreateAlbumFragment : Fragment() {
                     parent: AdapterView<*>,
                     view: View, position: Int, id: Long
                 ) {
-                    Toast.makeText(appContext,getString(R.string.selected_item) + " " + "" + recordLabels[position],Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(appContext,getString(R.string.selected_item) + " " + "" + recordLabels[position],Toast.LENGTH_SHORT).show()
                     recordLabelAlbumTxt  = recordLabels[position]
                 }
 
@@ -135,15 +136,12 @@ class CreateAlbumFragment : Fragment() {
             jsonObj.put("recordLabel", recordLabelAlbumTxt);
 
             Log.d("Args", jsonObj.toString())
-            val album_id = viewModel.createAlbumFromNetwork(jsonObj)
-            Log.d("Args", "album_id=$album_id")
+            viewModel.createAlbumFromNetwork(jsonObj)
             Toast.makeText(activity, "Album creado", Toast.LENGTH_LONG).show()
-            /*if (viewModel.createAlbumFromNetwork(jsonObj) != 0) {
-                Toast.makeText(activity, "Album creado", Toast.LENGTH_LONG).show()
-            }
-            else{
-                Toast.makeText(activity, "Error creando Album", Toast.LENGTH_LONG).show()
-            }*/
+
+            val action = CreateAlbumFragmentDirections.actionCreateAlbumFragmentToAlbumFragment()
+            findNavController().navigate(action)
+
         }
 
     }
@@ -155,6 +153,7 @@ class CreateAlbumFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.title_create_albums)
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(AlbumViewModel::class.java)
+
         viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
             it.apply {
                 viewModelAdapter!!.albums = this
@@ -163,6 +162,19 @@ class CreateAlbumFragment : Fragment() {
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
+
+        /*viewModel.createAlbum.observe(viewLifecycleOwner, Observer<Boolean> { createAlbumBoolean ->
+            Log.d("Args", createAlbumBoolean.toString())
+            if (createAlbumBoolean){
+                Toast.makeText(activity, "Album Creado", Toast.LENGTH_LONG).show()
+            }
+            else{
+                Toast.makeText(activity, "Error creando album", Toast.LENGTH_LONG).show()
+            }
+        })*/
+
+
+
     }
     override fun onDestroyView() {
         super.onDestroyView()

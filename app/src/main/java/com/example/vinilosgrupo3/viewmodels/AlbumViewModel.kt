@@ -44,10 +44,17 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     val album: LiveData<Album>
         get() = _album
 
+    private var _createAlbum = MutableLiveData<Boolean>(false)
+
+    val createAlbum: LiveData<Boolean>
+        get() = _createAlbum
+
+
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
+
 
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
 
@@ -90,23 +97,27 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
     }
 
-    fun createAlbumFromNetwork(album: JSONObject):Int {
+    fun createAlbumFromNetwork(album: JSONObject) {
         var id:Int=0
         try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
                     var data = albumRepository.createAlbum(album)
                     _album.postValue(data)
+                    Log.d("Args", "response createAlbum=$data")
                     id=data.albumId
+                    _createAlbum.postValue(true)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
+                _createAlbum.postValue(false)
             }
         }
         catch (e:Exception){
+            Log.d("Args", "response createAlbum error=$e")
             _eventNetworkError.value = true
         }
-        return id
+        //return id
     }
 
     fun onNetworkErrorShown() {
