@@ -26,6 +26,7 @@ class AlbumRepository (val application: Application) {
 
     suspend fun createAlbum(album: JSONObject):Album{
         Log.d("Args","Crear Album")
+        CacheManager.getInstance(application.applicationContext).deleteAlbums()
         return NetworkServiceAdapter.getInstance(application).createAlbum(album)
     }
 }
