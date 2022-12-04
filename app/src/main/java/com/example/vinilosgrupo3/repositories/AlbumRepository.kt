@@ -6,16 +6,10 @@ import com.android.volley.VolleyError
 import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.network.CacheManager
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
+import org.json.JSONObject
 
 class AlbumRepository (val application: Application) {
-    /*fun refreshData(callback: (List<Album>)->Unit, onError: (VolleyError)->Unit){
-        NetworkServiceAdapter.getInstance(application).getAlbums({
-            callback(it)
-        },{
-            onError
-        })
 
-    }*/
     suspend fun refreshData(): List<Album> {
         var potentialResp = CacheManager.getInstance(application.applicationContext).getAlbums()
         if(potentialResp.isEmpty()){
@@ -28,5 +22,11 @@ class AlbumRepository (val application: Application) {
             Log.d("Cache decision", "return ${potentialResp.size} elements from cache")
             return potentialResp
         }
+    }
+
+    suspend fun createAlbum(album: JSONObject):Album{
+        Log.d("Args","Crear Album")
+        CacheManager.getInstance(application.applicationContext).deleteAlbums()
+        return NetworkServiceAdapter.getInstance(application).createAlbum(album)
     }
 }

@@ -2,14 +2,17 @@ package com.example.vinilosgrupo3.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilosgrupo3.R
 import com.example.vinilosgrupo3.databinding.CollectorItemBinding
 import com.example.vinilosgrupo3.models.Collector
 import com.example.vinilosgrupo3.ui.CollectorFragmentDirections
+import com.example.vinilosgrupo3.ui.HomeFragmentDirections
 
 class CollectorAdapter : RecyclerView.Adapter<CollectorAdapter.CollectorViewHolder>(){
 
@@ -25,6 +28,7 @@ class CollectorAdapter : RecyclerView.Adapter<CollectorAdapter.CollectorViewHold
             CollectorViewHolder.LAYOUT,
             parent,
             false)
+
         return CollectorViewHolder(withDataBinding)
     }
 

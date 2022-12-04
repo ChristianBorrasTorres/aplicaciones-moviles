@@ -8,13 +8,25 @@
     tools:context=".ui.HomeFragment">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_visitor"
         android:layout_width="274dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="172dp"
-        android:text="@string/button_visitors"
+        android:layout_marginBottom="100dp"
+        android:text="@string/button_visitor"
         android:textColor="#4527A0"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_collector"
+        android:layout_width="274dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/button_collector"
+        android:textColor="#4527A0"
+        app:layout_constraintBottom_toTopOf="@+id/button_visitor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
@@ -25,7 +37,7 @@
         android:layout_height="426dp"
         android:contentDescription="@string/home_image"
         android:src="@drawable/home"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/button_visitor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.253"
         app:layout_constraintStart_toStartOf="parent"
