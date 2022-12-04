@@ -5,9 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,6 +38,7 @@ class CreateAlbumFragment : Fragment() {
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
 
+
         return view
     }
 
@@ -48,10 +47,19 @@ class CreateAlbumFragment : Fragment() {
         /*recyclerView = binding.albumsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter*/
-        Log.d("Args","onViewCreated CreateAlbumFragment")
 
-        val genre = resources.getStringArray(R.array.Genre)
-        val recordLabel = resources.getStringArray(R.array.RecordLabel)
+        var nameAlbumTxt:TextInputEditText
+        var coverAlbumTxt:TextInputEditText
+        var releaseDateAlbumTxt:TextInputEditText
+        var descriptionAlbumTxt:TextInputEditText
+        var genreAlbumTxt: String = ""
+        var recordLabelAlbumTxt:String = ""
+
+        val appContext = requireContext().applicationContext
+
+        val genres = arrayOf("Classical", "Salsa", "Rock", "Folk")
+        val recordLabels = arrayOf("Sony Music","EMI","Discos Fuentes","Elektra","Fania")
+
         val buttonCancelCreateAlbum = view.findViewById<Button>(R.id.button_cancel_create_album)
         val buttonCreateAlbum = view.findViewById<Button>(R.id.button_create_album)
 
@@ -60,22 +68,71 @@ class CreateAlbumFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+        // access the spinner
+        val spinnerGenre = view.findViewById<Spinner>(R.id.spinner_genre)
+        if (spinnerGenre != null) {
+            val adapter = ArrayAdapter(
+                appContext,
+                android.R.layout.simple_spinner_item, genres
+            )
+            spinnerGenre.adapter = adapter
+
+            spinnerGenre.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
+                    Toast.makeText(appContext,getString(R.string.selected_item) + " " + "" + genres[position],Toast.LENGTH_SHORT).show()
+                    genreAlbumTxt  = genres[position]
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
+
+        val spinnerRecordLabel = view.findViewById<Spinner>(R.id.spinner_record_label)
+        if (spinnerRecordLabel != null) {
+            val adapter = ArrayAdapter(
+                appContext,
+                android.R.layout.simple_spinner_item, recordLabels
+            )
+            spinnerRecordLabel.adapter = adapter
+
+            spinnerRecordLabel.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
+                    Toast.makeText(appContext,getString(R.string.selected_item) + " " + "" + recordLabels[position],Toast.LENGTH_SHORT).show()
+                    recordLabelAlbumTxt  = recordLabels[position]
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
+
         buttonCreateAlbum.setOnClickListener {
 
-            val nameAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_name_id)
-            val coverAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_cover_id)
-            val releaseDateAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_releaseDate_id)
-            val descriptionAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_description_id)
-            val genreAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_genre_id)
-            val recordLabelAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_record_label_id)
+            nameAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_name_id)
+            coverAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_cover_id)
+            releaseDateAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_releaseDate_id)
+            descriptionAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_description_id)
+            //val genreAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_genre_id)
+            //recordLabelAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_record_label_id)
 
             val jsonObj = JSONObject()
             jsonObj.put("name", nameAlbumTxt.text.toString());
             jsonObj.put("cover", coverAlbumTxt.text.toString());
             jsonObj.put("releaseDate", releaseDateAlbumTxt.text.toString());
             jsonObj.put("description", descriptionAlbumTxt.text.toString());
-            jsonObj.put("genre", genreAlbumTxt.text.toString());
-            jsonObj.put("recordLabel", recordLabelAlbumTxt.text.toString());
+            jsonObj.put("genre", genreAlbumTxt);
+            jsonObj.put("recordLabel", recordLabelAlbumTxt);
 
             Log.d("Args", jsonObj.toString())
             val album_id = viewModel.createAlbumFromNetwork(jsonObj)

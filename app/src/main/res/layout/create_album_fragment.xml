@@ -71,41 +71,47 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/album_genre"
+        <Spinner
+            android:id="@+id/spinner_genre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/album_genre_edit"
+            android:spinnerMode="dropdown"
             app:layout_constraintBottom_toTopOf="@id/album_description"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/album_genre_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintStart_toStartOf="parent"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/album_record_label"
+        <TextView
+            android:id="@+id/label_spinner_genre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/album_record_label_edit"
-            app:layout_constraintBottom_toTopOf="@id/album_genre"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/album_record_label_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/album_record_label"
+            android:layout_height="30dp"
+            android:text="@string/album_genre_edit"
+            android:textColor="@color/black_overlay"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/spinner_genre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <Spinner
+            android:id="@+id/spinner_record_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@id/label_spinner_genre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/label_spinner_record_label"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/album_record_label_edit"
+            android:textColor="@color/black_overlay"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/spinner_record_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
 
         <Button
             android:id="@+id/button_create_album"
