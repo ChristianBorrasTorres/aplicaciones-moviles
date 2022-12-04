@@ -28,9 +28,9 @@ import org.json.JSONObject
 class CreateAlbumFragment : Fragment() {
     private var _binding: CreateAlbumFragmentBinding? = null
     private val binding get() = _binding!!
-    //private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumViewModel
     private var viewModelAdapter: AlbumsAdapter? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,17 +49,19 @@ class CreateAlbumFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter*/
         Log.d("Args","onViewCreated CreateAlbumFragment")
+
+        val genre = resources.getStringArray(R.array.Genre)
+        val recordLabel = resources.getStringArray(R.array.RecordLabel)
         val buttonCancelCreateAlbum = view.findViewById<Button>(R.id.button_cancel_create_album)
-        //val buttonCreateAlbum = view.findViewById<Button>(R.id.button_create_album)
+        val buttonCreateAlbum = view.findViewById<Button>(R.id.button_create_album)
 
         buttonCancelCreateAlbum.setOnClickListener {
             val action = CreateAlbumFragmentDirections.actionCreateAlbumFragmentToCollectorFragment()
             findNavController().navigate(action)
         }
 
-        /*buttonCreateAlbum.setOnClickListener {
+        buttonCreateAlbum.setOnClickListener {
 
-            Toast.makeText(activity, "Create album", Toast.LENGTH_LONG).show()
             val nameAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_name_id)
             val coverAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_cover_id)
             val releaseDateAlbumTxt  = view.findViewById<TextInputEditText>(R.id.album_releaseDate_id)
@@ -76,7 +78,16 @@ class CreateAlbumFragment : Fragment() {
             jsonObj.put("recordLabel", recordLabelAlbumTxt.text.toString());
 
             Log.d("Args", jsonObj.toString())
-        }*/
+            val album_id = viewModel.createAlbumFromNetwork(jsonObj)
+            Log.d("Args", "album_id=$album_id")
+            Toast.makeText(activity, "Album creado", Toast.LENGTH_LONG).show()
+            /*if (viewModel.createAlbumFromNetwork(jsonObj) != 0) {
+                Toast.makeText(activity, "Album creado", Toast.LENGTH_LONG).show()
+            }
+            else{
+                Toast.makeText(activity, "Error creando Album", Toast.LENGTH_LONG).show()
+            }*/
+        }
 
     }
 

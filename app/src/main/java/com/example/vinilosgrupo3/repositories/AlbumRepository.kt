@@ -23,4 +23,9 @@ class AlbumRepository (val application: Application) {
             return potentialResp
         }
     }
+
+    suspend fun createAlbum(album: JSONObject):Album{
+        Log.d("Args","Crear Album")
+        return NetworkServiceAdapter.getInstance(application).createAlbum(album)
+    }
 }

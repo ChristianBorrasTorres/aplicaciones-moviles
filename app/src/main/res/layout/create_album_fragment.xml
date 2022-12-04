@@ -99,9 +99,16 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/album_record_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <Button
             android:id="@+id/button_create_album"
-            android:onClick="@{()->AlbumViewModel.createDataFromNetwork()}"
             android:layout_width="150dp"
             android:layout_height="48dp"
             android:layout_marginBottom="20dp"

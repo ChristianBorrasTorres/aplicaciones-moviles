@@ -52,5 +52,20 @@
     <string name="album_genre_edit">Género Album</string>
     <string name="album_record_label_edit">Sello Discografico Album</string>
 
+    <string-array name="Genre">
+        <item>Classical</item>
+        <item>Salsa</item>
+        <item>Rock</item>
+        <item>Folk</item>
+    </string-array>
+
+    <string-array name="RecordLabel">
+        <item>Sony Music</item>
+        <item>EMI</item>
+        <item>Discos Fuentes</item>
+        <item>Elektra</item>
+        <item>Fania Records</item>
+    </string-array>
+
 
 </resources>

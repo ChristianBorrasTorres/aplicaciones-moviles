@@ -10,6 +10,7 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
@@ -37,6 +38,11 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
 
     val albums: LiveData<List<Album>>
         get() = _albums
+
+    private val _album = MutableLiveData<Album>()
+
+    val album: LiveData<Album>
+        get() = _album
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -84,31 +90,23 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         }
     }
 
-    fun createDataFromNetwork() {
-        Log.d("arg","createDataFromNetwork")
-
+    fun createAlbumFromNetwork(album: JSONObject):Int {
+        var id:Int=0
         try {
-            Log.d("arg","createDataFromNetwork")
-            if (nameAlbum.value == null) {
-                Log.d("arg","nameAlbum.value == null")
-            }
-            /*viewModelScope.launch(Dispatchers.Default){
+            viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = albumRepository.refreshData()
-                    _albums.postValue(data)
-                }
-                withContext(Dispatchers.IO){
-                    var data = albumRepository.refreshData()
-                    _albums.postValue(data)
+                    var data = albumRepository.createAlbum(album)
+                    _album.postValue(data)
+                    id=data.albumId
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
-            }*/
+            }
         }
         catch (e:Exception){
-            Log.d("arg",e.toString())
-        //_eventNetworkError.value = true
+            _eventNetworkError.value = true
         }
+        return id
     }
 
     fun onNetworkErrorShown() {
