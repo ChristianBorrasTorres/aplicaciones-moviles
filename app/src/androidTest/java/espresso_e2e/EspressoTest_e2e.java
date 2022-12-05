@@ -13,6 +13,7 @@ import static org.hamcrest.core.AllOf.allOf;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -35,7 +36,7 @@ public class EspressoTest_e2e {
             new ActivityScenarioRule<MainActivity>(MainActivity.class);
 
     @Test
-    public void visualizarAlbumDetalle() {
+    public void visualizarAlbumListYDetalle() {
 
         // check whether album names and pictures are displayed
         /*onView(withRecyclerView(R.id.albumsRv)
@@ -72,7 +73,7 @@ public class EspressoTest_e2e {
 
 
     @Test
-    public void visualizarMusicoDetalle() {
+    public void visualizarMusicoListYDetalle() {
 
         // check whether album names and pictures are displayed
         /*onView(withRecyclerView(R.id.albumsRv)
@@ -113,7 +114,7 @@ public class EspressoTest_e2e {
 
 
     @Test
-    public void visualizarColeccionistaLista() {
+    public void visualizarColeccionistaListYDetalle() {
 
         // check whether album names and pictures are displayed
         /*onView(withRecyclerView(R.id.albumsRv)
@@ -161,7 +162,7 @@ public class EspressoTest_e2e {
         onView(allOf(withId(R.id.button_create_album), isDisplayed())).perform(click());
 
         sleep(1000);
-        //click on input "record label"
+        //click on input "sello discografico"
         onView(allOf(withId(R.id.spinner_record_label), isDisplayed())).perform(click());
 
         sleep(1000);
@@ -169,7 +170,7 @@ public class EspressoTest_e2e {
         onView(allOf(withText("EMI"), isDisplayed())).perform(click());
 
         sleep(1000);
-        //click on input "genre"
+        //click on input "genero album"
         onView(allOf(withId(R.id.spinner_genre), isDisplayed())).perform(click());
 
         sleep(1000);
@@ -177,7 +178,7 @@ public class EspressoTest_e2e {
         onView(allOf(withText("Rock"), isDisplayed())).perform(click());
 
         sleep(1000);
-        //click on input "description"
+        //click on input "descripcion album"
         onView(allOf(withId(R.id.album_description), isDisplayed())).perform(click());
 
         sleep(1000);
@@ -186,16 +187,16 @@ public class EspressoTest_e2e {
         pressBack();
 
         sleep(1000);
-        //click on input "release date"
+        //click on input "fecha lanzamiento album"
         onView(allOf(withId(R.id.album_releaseDate), isDisplayed())).perform(click());
 
         sleep(1000);
         // type release date
-        onView(withId(R.id.album_releaseDate_id)).perform(typeText("2004-08-01T00:00:00-05:00"));
+        onView(withId(R.id.album_releaseDate_id)).perform(typeText("2004"));
         pressBack();
 
         sleep(1000);
-        //click on input "cover"
+        //click on input "cover album"
         onView(allOf(withId(R.id.album_cover), isDisplayed())).perform(click());
 
         sleep(1000);
@@ -204,7 +205,7 @@ public class EspressoTest_e2e {
         pressBack();
 
         sleep(1000);
-        //click on input "name"
+        //click on input "nombre album"
         onView(allOf(withId(R.id.album_name), isDisplayed())).perform(click());
 
         sleep(1000);
@@ -213,8 +214,15 @@ public class EspressoTest_e2e {
         pressBack();
 
         sleep(1000);
-        //click on button "create album"
+        //click on button "crear album"
         onView(allOf(withId(R.id.button_create_album), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // check whether album is in list
+        onView(allOf(withId(R.id.albumsRv)))
+                .perform(new ViewAction[]{
+                        RecyclerViewActions.actionOnItemAtPosition(4, click())
+                });
 
     }
 
