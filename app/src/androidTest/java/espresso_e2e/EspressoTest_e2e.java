@@ -217,12 +217,53 @@ public class EspressoTest_e2e {
         //click on button "crear album"
         onView(allOf(withId(R.id.button_create_album), isDisplayed())).perform(click());
 
-        sleep(1000);
+        /*sleep(1000);
         // check whether album is in list
         onView(allOf(withId(R.id.albumsRv)))
                 .perform(new ViewAction[]{
                         RecyclerViewActions.actionOnItemAtPosition(4, click())
-                });
+                });*/
+
+    }
+
+    @Test
+    public void asociarTrackConAlbum() {
+
+        sleep(1000);
+        //click on button "visitantes"
+        onView(allOf(withId(R.id.button_visitor), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // click on album in list
+        onView(allOf(withId(R.id.albumsRv), isDisplayed())).perform(new ViewAction[]{
+                RecyclerViewActions.actionOnItemAtPosition(0, click())
+        });
+
+        sleep(1000);
+        //click on button "agregar track"
+        onView(allOf(withId(R.id.button_add_tracki), isDisplayed())).perform(click());
+
+
+        sleep(1000);
+        //click on input "duracion"
+        onView(allOf(withId(R.id.track_duration), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // type duracion
+        onView(withId(R.id.track_duration_id)).perform(typeText("05:00"));
+        pressBack();
+
+        sleep(1000);
+        //click on input "nombre del track"
+        onView(allOf(withId(R.id.track_name), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // type track name
+        onView(withId(R.id.track_name_id)).perform(typeText("new song"));
+        pressBack();
+
+        sleep(1000);
+        pressBack();
 
     }
 
