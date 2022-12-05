@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_createAlbumFragment_to_CollectorFragment"
             app:destination="@id/collectorFragment" />
+        <action
+            android:id="@+id/action_createAlbumFragment_to_AlbumFragment"
+            app:destination="@id/albumFragment" />
     </fragment>
 
     <fragment

@@ -3,6 +3,7 @@ package espresso_e2e;
 import static android.os.SystemClock.sleep;
 import static  androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static  androidx.test.espresso.assertion.ViewAssertions.matches;
 import static  androidx.test.espresso.matcher.ViewMatchers.*;
 
@@ -12,6 +13,7 @@ import static org.hamcrest.core.AllOf.allOf;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -34,7 +36,7 @@ public class EspressoTest_e2e {
             new ActivityScenarioRule<MainActivity>(MainActivity.class);
 
     @Test
-    public void visualizarAlbumDetalle() {
+    public void visualizarAlbumListYDetalle() {
 
         // check whether album names and pictures are displayed
         /*onView(withRecyclerView(R.id.albumsRv)
@@ -43,7 +45,7 @@ public class EspressoTest_e2e {
 
         sleep(1000);
         //click on button "visitantes"
-        onView(allOf(withId(R.id.button), isDisplayed())).perform(click());
+        onView(allOf(withId(R.id.button_visitor), isDisplayed())).perform(click());
 
         sleep(1000);
         // click on album in list
@@ -71,7 +73,7 @@ public class EspressoTest_e2e {
 
 
     @Test
-    public void visualizarMusicoDetalle() {
+    public void visualizarMusicoListYDetalle() {
 
         // check whether album names and pictures are displayed
         /*onView(withRecyclerView(R.id.albumsRv)
@@ -112,7 +114,7 @@ public class EspressoTest_e2e {
 
 
     @Test
-    public void visualizarColeccionistaLista() {
+    public void visualizarColeccionistaListYDetalle() {
 
         // check whether album names and pictures are displayed
         /*onView(withRecyclerView(R.id.albumsRv)
@@ -145,6 +147,82 @@ public class EspressoTest_e2e {
         // return to album catalog and check if album catalog is displayed
         pressBack();
         onView(allOf(withId(R.id.collectorsRv), isDisplayed()));
+
+    }
+
+    @Test
+    public void crearAlbum() {
+
+        sleep(1000);
+        //click on button "coleccionistas"
+        onView(allOf(withId(R.id.button_collector), isDisplayed())).perform(click());
+
+        sleep(1000);
+        //click on button "crear album"
+        onView(allOf(withId(R.id.button_create_album), isDisplayed())).perform(click());
+
+        sleep(1000);
+        //click on input "sello discografico"
+        onView(allOf(withId(R.id.spinner_record_label), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // click on record label
+        onView(allOf(withText("EMI"), isDisplayed())).perform(click());
+
+        sleep(1000);
+        //click on input "genero album"
+        onView(allOf(withId(R.id.spinner_genre), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // click on genre
+        onView(allOf(withText("Rock"), isDisplayed())).perform(click());
+
+        sleep(1000);
+        //click on input "descripcion album"
+        onView(allOf(withId(R.id.album_description), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // type description
+        onView(withId(R.id.album_description_id)).perform(typeText("American Idiot es el album mas popular de Green Day"));
+        pressBack();
+
+        sleep(1000);
+        //click on input "fecha lanzamiento album"
+        onView(allOf(withId(R.id.album_releaseDate), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // type release date
+        onView(withId(R.id.album_releaseDate_id)).perform(typeText("2004"));
+        pressBack();
+
+        sleep(1000);
+        //click on input "cover album"
+        onView(allOf(withId(R.id.album_cover), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // type cover URL
+        onView(withId(R.id.album_cover_id)).perform(typeText("https://upload.wikimedia.org/wikipedia/en/e/ed/Green_Day_-_American_Idiot_album_cover.png"));
+        pressBack();
+
+        sleep(1000);
+        //click on input "nombre album"
+        onView(allOf(withId(R.id.album_name), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // type album name
+        onView(withId(R.id.album_name_id)).perform(typeText("American Idiot"));
+        pressBack();
+
+        sleep(1000);
+        //click on button "crear album"
+        onView(allOf(withId(R.id.button_create_album), isDisplayed())).perform(click());
+
+        sleep(1000);
+        // check whether album is in list
+        onView(allOf(withId(R.id.albumsRv)))
+                .perform(new ViewAction[]{
+                        RecyclerViewActions.actionOnItemAtPosition(4, click())
+                });
 
     }
 
