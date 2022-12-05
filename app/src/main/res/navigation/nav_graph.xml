@@ -13,7 +13,11 @@
         <action
             android:id="@+id/action_homeFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_collectorFragment"
+            app:destination="@id/collectorFragment" />
     </fragment>
+
 
     <fragment
         android:id="@+id/albumFragment"
@@ -32,6 +36,15 @@
         <argument
             android:name="albumId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAlbumFragment"
+        android:name="com.example.vinilosgrupo3.ui.CreateAlbumFragment"
+        android:label="Álbumes"
+        tools:layout="@layout/create_album_fragment" >
+        <action
+            android:id="@+id/action_createAlbumFragment_to_CollectorFragment"
+            app:destination="@id/collectorFragment" />
     </fragment>
 
     <fragment
@@ -61,6 +74,9 @@
         <action
             android:id="@+id/action_collectorFragment_to_collectorDetailFragment"
             app:destination="@id/collectorDetailFragment" />
+        <action
+            android:id="@+id/action_collectorFragment_to_createAlbumFragment"
+            app:destination="@id/createAlbumFragment" />
     </fragment>
 
     <fragment

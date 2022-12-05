@@ -39,15 +39,20 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/image_list_artist"
                     android:image="@{musician.image}" />
 
                 <TextView
                     android:id="@+id/musician_name"
-                    android:layout_width="141dp"
-                    android:layout_height="31dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:shadowColor="@color/black"
                     android:text="@{musician.name}"
-                    android:textColor="@color/black_overlay"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black"
                     android:textStyle="bold" />
 
             </LinearLayout>

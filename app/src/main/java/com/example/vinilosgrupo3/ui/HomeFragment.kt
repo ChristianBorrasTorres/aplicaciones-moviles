@@ -39,9 +39,15 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val home = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val button = home.findViewById<Button>(R.id.button)
-        button.setOnClickListener {
+        val buttonVisitor = home.findViewById<Button>(R.id.button_visitor)
+        val buttonCollector = home.findViewById<Button>(R.id.button_collector)
+
+        buttonVisitor.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToAlbumFragment()
+            findNavController().navigate(action)
+        }
+        buttonCollector.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToCollectorFragment()
             findNavController().navigate(action)
         }
         return home

@@ -1,20 +1,48 @@
 package com.example.vinilosgrupo3.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.vinilosgrupo3.R
 import com.example.vinilosgrupo3.models.Album
-import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 import com.example.vinilosgrupo3.repositories.AlbumRepository
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
+
+
+    var nameAlbum: MutableLiveData<String> = MutableLiveData()
+    /*val nameAlbum: LiveData<String>
+        get() = _nameAlbum*/
+
+    var coverAlbum: MutableLiveData<String> = MutableLiveData()
+    var releaseDateAlbum: MutableLiveData<String> = MutableLiveData()
+    var descriptionAlbum: MutableLiveData<String> = MutableLiveData()
+    var genreAlbum: MutableLiveData<String> = MutableLiveData()
+    var recordLabelAlbum: MutableLiveData<String> = MutableLiveData()
+
+    private var albumMutableLiveData: MutableLiveData<Album?>? = null
+
+    fun getAlbumData(): MutableLiveData<Album?>? {
+        if (albumMutableLiveData == null) {
+            albumMutableLiveData = MutableLiveData()
+        }
+        return albumMutableLiveData
+    }
 
     private val _albums = MutableLiveData<List<Album>>()
 
     val albums: LiveData<List<Album>>
         get() = _albums
+
+    private val _album = MutableLiveData<Album>()
+
+    val album: LiveData<Album>
+        get() = _album
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -49,6 +77,10 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
                     var data = albumRepository.refreshData()
                     _albums.postValue(data)
                 }
+                withContext(Dispatchers.IO){
+                    var data = albumRepository.refreshData()
+                    _albums.postValue(data)
+                }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
@@ -56,6 +88,25 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         catch (e:Exception){
             _eventNetworkError.value = true
         }
+    }
+
+    fun createAlbumFromNetwork(album: JSONObject):Int {
+        var id:Int=0
+        try {
+            viewModelScope.launch (Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = albumRepository.createAlbum(album)
+                    _album.postValue(data)
+                    id=data.albumId
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
+            _eventNetworkError.value = true
+        }
+        return id
     }
 
     fun onNetworkErrorShown() {

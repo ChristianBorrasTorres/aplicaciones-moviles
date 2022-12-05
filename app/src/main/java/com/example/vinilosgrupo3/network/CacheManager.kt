@@ -29,6 +29,11 @@ class CacheManager(context: Context) {
         return albums
     }
 
+    fun deleteAlbums(): List<Album> {
+        albums.clear()
+        return albums
+    }
+
     // Cache Album Detail
     private var albumsDetail: HashMap<Int, Album> = hashMapOf()
     fun addAlbum(albumId: Int, album: Album){
