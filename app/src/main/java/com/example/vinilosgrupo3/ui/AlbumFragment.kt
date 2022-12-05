@@ -16,9 +16,6 @@ import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.ui.adapters.AlbumsAdapter
 import com.example.vinilosgrupo3.viewmodels.AlbumViewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class AlbumFragment : Fragment() {
     private var _binding: AlbumFragmentBinding? = null
     private val binding get() = _binding!!

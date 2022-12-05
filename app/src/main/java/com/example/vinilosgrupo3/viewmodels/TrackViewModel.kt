@@ -1,12 +1,9 @@
 package com.example.vinilosgrupo3.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.vinilosgrupo3.R
 import com.example.vinilosgrupo3.models.Track
 import com.example.vinilosgrupo3.repositories.TrackRepository
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -52,28 +49,8 @@ class TrackViewModel(application: Application, albumId: Int) :  AndroidViewModel
 
 
     init {
-        //refreshDataFromNetwork()
     }
 
-    /*private fun refreshDataFromNetwork() {
-        try {
-            viewModelScope.launch(Dispatchers.Default){
-                withContext(Dispatchers.IO){
-                    var data = trackRepository.refreshData()
-                    _tracks.postValue(data)
-                }
-                withContext(Dispatchers.IO){
-                    var data = trackRepository.refreshData()
-                    _tracks.postValue(data)
-                }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
-            }
-        }
-        catch (e:Exception){
-            _eventNetworkError.value = true
-        }
-    }*/
 
     fun addTrackFromNetwork(track: JSONObject):Int {
         var id:Int=0
