@@ -30,44 +30,58 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="TODO"></ImageView>
+                    android:contentDescription="@string/image_artist_detalle"></ImageView>
 
                 <ImageView
                     android:id="@+id/detail_musician_image"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
-                    android:adjustViewBounds="true"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:image="@{musiciandetail.image}"/>
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/image_detail_artist"
+                    android:image="@{musiciandetail.image}" />
 
                 <TextView
                     android:id="@+id/detail_musician_name_placeholder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:shadowColor="@color/black"
                     android:text="@{musiciandetail.name}"
-                    android:textStyle="bold"
-                    android:textColor="@color/black_overlay"/>
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/detail_musician_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:shadowColor="@color/black"
                     android:text="@{musiciandetail.description}"
-                    android:textColor="@color/black_overlay"/>
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black" />
 
                 <TextView
                     android:id="@+id/detail_musician_birthDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:shadowColor="@color/black"
                     android:text='@{@string/musician_birth_date+musiciandetail.birthDate}'
-                    android:textColor="@color/black_overlay"/>
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

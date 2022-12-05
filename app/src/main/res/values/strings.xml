@@ -51,6 +51,15 @@
     <string name="album_description_edit">Descripción Album</string>
     <string name="album_genre_edit">Género Album</string>
     <string name="album_record_label_edit">Sello Discografico Album</string>
+    <string name="image_from_list">Imagen del álbum en la lista</string>
+    <string name="image_album_detail">Imagen del álbum en su detalle</string>
+    <string name="image_album_detalle">Imagen del álbum en el detalle</string>
+    <string name="image_list_artist">Imagen del músico en la lista</string>
+    <string name="image_detail_artist">Imagen del artista en detalle</string>
+    <string name="image_artist_detalle">Imagen del artista en su detalle</string>
+    <string name="values">Valores del detalle</string>
+    <string name="sello_discografico">Sello discográfico del álbum</string>
+    <string name="álbum_genero">Géneros de música</string>
 
     <string-array name="Genre">
         <item>Classical</item>

@@ -32,33 +32,48 @@
                     android:id="@+id/collector_name_detail_placeholder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:shadowColor="@color/black"
                     android:text="@{collector_detail.name}"
-                    android:textStyle="bold"
-                    android:textColor="@color/black_overlay"/>
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/collector_detail_telephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:shadowColor="@color/black"
                     android:text="@{collector_detail.telephone}"
-                    android:textColor="@color/black_overlay"/>
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black" />
 
                 <TextView
                     android:id="@+id/collector_detail_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:shadowColor="@color/black"
                     android:text="@{collector_detail.email}"
-                    android:textColor="@color/black_overlay"/>
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black" />
 
                 <Spinner
                     android:id="@+id/planets_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/values"
+                    android:minHeight="48dp" />
 
 
             </LinearLayout>

@@ -21,11 +21,11 @@
 
     <Button
         android:id="@+id/button_create_album"
-        android:layout_width="150dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="20dp"
         android:text="@string/button_create_album"
-        android:textColor="#4527A0"
-        android:layout_gravity="bottom"/>
+        android:textColor="#4527A0" />
 
 </FrameLayout>
