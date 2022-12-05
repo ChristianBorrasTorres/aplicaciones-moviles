@@ -1,15 +1,15 @@
 package com.example.vinilosgrupo3.ui
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
-
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,9 +19,6 @@ import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.ui.adapters.DetailAdapter
 import com.example.vinilosgrupo3.viewmodels.DetailViewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class DetailFragment : Fragment() {
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
@@ -36,6 +33,14 @@ class DetailFragment : Fragment() {
         _binding = DetailFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = DetailAdapter()
+
+        val buttonAddTrack = view.findViewById<Button>(R.id.button_add_tracki)
+        val args: DetailFragmentArgs by navArgs()
+        buttonAddTrack.setOnClickListener {
+            val action = DetailFragmentDirections.actionDetailFragmentToAddTrackFragment(args.albumId)
+            findNavController().navigate(action)
+        }
+
         return view
     }
 
@@ -47,6 +52,7 @@ class DetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }

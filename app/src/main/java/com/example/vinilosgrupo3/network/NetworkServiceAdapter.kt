@@ -49,17 +49,6 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
-    /*fun createAlbum(body: JSONObject,  onComplete:(resp:JSONObject)->Unit , onError: (error:VolleyError)->Unit){
-        requestQueue.add(postRequest("albums",
-            body,
-            Response.Listener<JSONObject> { response ->
-                onComplete(response)
-            },
-            Response.ErrorListener {
-                onError(it)
-            }))
-    }*/
-
     suspend fun createAlbum(body: JSONObject) = suspendCoroutine<Album> { cont ->
         requestQueue.add(postRequest("albums",
             body,
@@ -74,7 +63,19 @@ class NetworkServiceAdapter constructor(context: Context) {
             }))
     }
 
-
+    suspend fun addTrackToAlbum(albumId: Int, body: JSONObject) = suspendCoroutine<Track> { cont ->
+        requestQueue.add(postRequest("albums/$albumId/tracks",
+            body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("Args", response.toString())
+                var item = Track(id = response.getInt("id"),name = response.getString("name"), duration = response.getString("duration"))
+                Log.d("Args", item.toString())
+                cont.resume(item)
+            },
+            Response.ErrorListener {
+                cont.resumeWithException(it)
+            }))
+    }
 
     suspend fun getDetail(albumId: Int) = suspendCoroutine<Album> { cont ->
         requestQueue.add(getRequest("albums/$albumId",

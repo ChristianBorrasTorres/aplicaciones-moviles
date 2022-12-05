@@ -2,19 +2,11 @@ package com.example.vinilosgrupo3.repositories
 
 import android.app.Application
 import android.util.Log
-import com.android.volley.VolleyError
 import com.example.vinilosgrupo3.models.Album
 import com.example.vinilosgrupo3.network.CacheManager
 import com.example.vinilosgrupo3.network.NetworkServiceAdapter
 
 class DetailRepository (val application: Application) {
-    /*fun refreshData(albumId:Int, callback: (Album)->Unit, onError: (VolleyError)->Unit) {
-        NetworkServiceAdapter.getInstance(application).getDetail(albumId,{
-            callback(it)
-        },{
-            onError
-        })
-    }*/
     suspend fun refreshData(albumId:Int): Album {
         var potentialResp = CacheManager.getInstance(application.applicationContext).getAlbum(albumId)
         if(potentialResp.isEmpty()){

@@ -37,16 +37,10 @@ class CreateAlbumFragment : Fragment() {
         _binding = CreateAlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
-
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        /*recyclerView = binding.albumsRv
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter*/
 
         var nameAlbumTxt:TextInputEditText
         var coverAlbumTxt:TextInputEditText

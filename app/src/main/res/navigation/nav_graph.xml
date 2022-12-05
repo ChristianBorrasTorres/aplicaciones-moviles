@@ -18,7 +18,6 @@
             app:destination="@id/collectorFragment" />
     </fragment>
 
-
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.vinilosgrupo3.ui.AlbumFragment"
@@ -36,6 +35,9 @@
         <argument
             android:name="albumId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_DetailFragment_to_AddTrackFragment"
+            app:destination="@id/addTrackFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAlbumFragment"
@@ -45,6 +47,19 @@
         <action
             android:id="@+id/action_createAlbumFragment_to_CollectorFragment"
             app:destination="@id/collectorFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTrackFragment"
+        android:name="com.example.vinilosgrupo3.ui.AddTrackFragment"
+        android:label="Añadir Track"
+        tools:layout="@layout/add_track_fragment" >
+        <action
+            android:id="@+id/action_addTrackFragment_to_AlbumFragment"
+            app:destination="@id/collectorFragment" />
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
     </fragment>
 
     <fragment
